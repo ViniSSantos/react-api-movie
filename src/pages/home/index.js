@@ -1,6 +1,8 @@
 import { Container, MovieList, Movie } from "./styles";
 import { apiKey } from '../../config/key'
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";  
+
 
 
 function Home() {
@@ -9,12 +11,13 @@ function Home() {
 
     useEffect(() => {
         //consumir api
-
+      
         fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(setMovies(data.results))
-            })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data.results); // imprime os dados no console
+            setMovies(data.results); // atualiza o estado movies
+          })
 
     }, []) /*Array de depêndencia vazio,para atualizar toda a vez que o componente for recarregado */
 
@@ -25,7 +28,8 @@ function Home() {
                 {movies.map(movie => {
                     return (
                         <Movie key={movie.id}>
-                            <a href="google.com"><img src={`${image_path}${movie.poster_path}`} alt={movie.title}></img></a>
+                            <Link to={`/details/${movie.id}`}> <img src={`${image_path}${movie.poster_path}`} alt={movie.title}></img></Link>
+
                             <span>{movie.title}</span>
                         </Movie>
                     )
