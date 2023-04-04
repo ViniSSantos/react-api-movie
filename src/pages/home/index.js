@@ -12,7 +12,7 @@ function Home() {
     useEffect(() => {
         //consumir api
       
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`)
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR-US&page=1`)
           .then(response => response.json())
           .then(data => {
             console.log(data.results); // imprime os dados no console
